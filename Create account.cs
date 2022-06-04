@@ -133,6 +133,7 @@ namespace AsigurariDeViataSiBunuri
             }
             else
             {
+                bool alreadyHasAccount = false;
                 errorProvider.Clear();
                 if (verifyData() == true)
                 {
@@ -176,14 +177,18 @@ namespace AsigurariDeViataSiBunuri
                         {
                             MessageBox.Show("Nu ati introdus corect datele!");
                         }
+                        alreadyHasAccount = true;
                     }
-                    if(rbEng.Checked == true)
+                    if(alreadyHasAccount==false)
                     {
-                        MessageBox.Show("Your account was succesfully created!", "Account", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Contul dvs. a fost creat cu succes!", "Cont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (rbEng.Checked == true)
+                        {
+                            MessageBox.Show("Your account was succesfully created!", "Account", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Contul dvs. a fost creat cu succes!", "Cont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     this.Close();
                 }

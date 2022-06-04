@@ -43,6 +43,7 @@ namespace AsigurariDeViataSiBunuri
             this.rbRom = new System.Windows.Forms.RadioButton();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tabOffer = new System.Windows.Forms.TabPage();
+            this.lbPhoto = new System.Windows.Forms.Label();
             this.cbTypeH = new System.Windows.Forms.ComboBox();
             this.cbFieldH = new System.Windows.Forms.ComboBox();
             this.cbType = new System.Windows.Forms.ComboBox();
@@ -87,7 +88,6 @@ namespace AsigurariDeViataSiBunuri
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.insurancesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seeOwnedInsurancesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seeMeetingDatesAndTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelButtons.SuspendLayout();
@@ -123,9 +123,9 @@ namespace AsigurariDeViataSiBunuri
             this.btnAccidents.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAccidents.Image = ((System.Drawing.Image)(resources.GetObject("btnAccidents.Image")));
             this.btnAccidents.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccidents.Location = new System.Drawing.Point(0, 542);
+            this.btnAccidents.Location = new System.Drawing.Point(-1, 542);
             this.btnAccidents.Name = "btnAccidents";
-            this.btnAccidents.Size = new System.Drawing.Size(275, 95);
+            this.btnAccidents.Size = new System.Drawing.Size(276, 95);
             this.btnAccidents.TabIndex = 6;
             this.btnAccidents.Text = "Accidents";
             this.btnAccidents.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -139,9 +139,9 @@ namespace AsigurariDeViataSiBunuri
             this.btnHealth.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnHealth.Image = ((System.Drawing.Image)(resources.GetObject("btnHealth.Image")));
             this.btnHealth.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHealth.Location = new System.Drawing.Point(0, 281);
+            this.btnHealth.Location = new System.Drawing.Point(-1, 281);
             this.btnHealth.Name = "btnHealth";
-            this.btnHealth.Size = new System.Drawing.Size(275, 92);
+            this.btnHealth.Size = new System.Drawing.Size(276, 92);
             this.btnHealth.TabIndex = 3;
             this.btnHealth.Text = "Health";
             this.btnHealth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -171,9 +171,9 @@ namespace AsigurariDeViataSiBunuri
             this.btnLife.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnLife.Image = ((System.Drawing.Image)(resources.GetObject("btnLife.Image")));
             this.btnLife.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLife.Location = new System.Drawing.Point(0, 367);
+            this.btnLife.Location = new System.Drawing.Point(-1, 367);
             this.btnLife.Name = "btnLife";
-            this.btnLife.Size = new System.Drawing.Size(275, 94);
+            this.btnLife.Size = new System.Drawing.Size(276, 94);
             this.btnLife.TabIndex = 4;
             this.btnLife.Text = "Life";
             this.btnLife.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -187,9 +187,9 @@ namespace AsigurariDeViataSiBunuri
             this.btnHouse.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnHouse.Image = ((System.Drawing.Image)(resources.GetObject("btnHouse.Image")));
             this.btnHouse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHouse.Location = new System.Drawing.Point(0, 179);
+            this.btnHouse.Location = new System.Drawing.Point(-1, 179);
             this.btnHouse.Name = "btnHouse";
-            this.btnHouse.Size = new System.Drawing.Size(275, 105);
+            this.btnHouse.Size = new System.Drawing.Size(276, 105);
             this.btnHouse.TabIndex = 2;
             this.btnHouse.Text = "House";
             this.btnHouse.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -214,9 +214,9 @@ namespace AsigurariDeViataSiBunuri
             this.btnAuto.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAuto.Image = ((System.Drawing.Image)(resources.GetObject("btnAuto.Image")));
             this.btnAuto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAuto.Location = new System.Drawing.Point(0, 91);
+            this.btnAuto.Location = new System.Drawing.Point(-1, 91);
             this.btnAuto.Name = "btnAuto";
-            this.btnAuto.Size = new System.Drawing.Size(275, 92);
+            this.btnAuto.Size = new System.Drawing.Size(276, 92);
             this.btnAuto.TabIndex = 0;
             this.btnAuto.Text = "Auto";
             this.btnAuto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -227,7 +227,7 @@ namespace AsigurariDeViataSiBunuri
             // 
             this.rbEng.AutoSize = true;
             this.rbEng.Checked = true;
-            this.rbEng.Location = new System.Drawing.Point(1015, 65);
+            this.rbEng.Location = new System.Drawing.Point(1016, 48);
             this.rbEng.Name = "rbEng";
             this.rbEng.Size = new System.Drawing.Size(75, 21);
             this.rbEng.TabIndex = 1;
@@ -239,7 +239,7 @@ namespace AsigurariDeViataSiBunuri
             // rbRom
             // 
             this.rbRom.AutoSize = true;
-            this.rbRom.Location = new System.Drawing.Point(1097, 65);
+            this.rbRom.Location = new System.Drawing.Point(1097, 48);
             this.rbRom.Name = "rbRom";
             this.rbRom.Size = new System.Drawing.Size(82, 21);
             this.rbRom.TabIndex = 2;
@@ -251,7 +251,7 @@ namespace AsigurariDeViataSiBunuri
             // 
             this.tbName.BackColor = System.Drawing.Color.LightCyan;
             this.tbName.Font = new System.Drawing.Font("Bahnschrift", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(879, 92);
+            this.tbName.Location = new System.Drawing.Point(879, 75);
             this.tbName.MaximumSize = new System.Drawing.Size(300, 50);
             this.tbName.MaxLength = 100;
             this.tbName.MinimumSize = new System.Drawing.Size(300, 30);
@@ -264,6 +264,7 @@ namespace AsigurariDeViataSiBunuri
             // tabOffer
             // 
             this.tabOffer.BackColor = System.Drawing.Color.Lavender;
+            this.tabOffer.Controls.Add(this.lbPhoto);
             this.tabOffer.Controls.Add(this.cbTypeH);
             this.tabOffer.Controls.Add(this.cbFieldH);
             this.tabOffer.Controls.Add(this.cbType);
@@ -301,9 +302,18 @@ namespace AsigurariDeViataSiBunuri
             this.tabOffer.Margin = new System.Windows.Forms.Padding(2);
             this.tabOffer.Name = "tabOffer";
             this.tabOffer.Padding = new System.Windows.Forms.Padding(2);
-            this.tabOffer.Size = new System.Drawing.Size(906, 457);
+            this.tabOffer.Size = new System.Drawing.Size(916, 457);
             this.tabOffer.TabIndex = 3;
             this.tabOffer.Text = "Offer";
+            // 
+            // lbPhoto
+            // 
+            this.lbPhoto.AutoSize = true;
+            this.lbPhoto.Location = new System.Drawing.Point(31, 401);
+            this.lbPhoto.Name = "lbPhoto";
+            this.lbPhoto.Size = new System.Drawing.Size(203, 20);
+            this.lbPhoto.TabIndex = 34;
+            this.lbPhoto.Text = "*Please upload your photo";
             // 
             // cbTypeH
             // 
@@ -361,7 +371,7 @@ namespace AsigurariDeViataSiBunuri
             // 
             // btnCalculateOffer
             // 
-            this.btnCalculateOffer.Location = new System.Drawing.Point(255, 417);
+            this.btnCalculateOffer.Location = new System.Drawing.Point(264, 415);
             this.btnCalculateOffer.Name = "btnCalculateOffer";
             this.btnCalculateOffer.Size = new System.Drawing.Size(335, 31);
             this.btnCalculateOffer.TabIndex = 25;
@@ -568,13 +578,15 @@ namespace AsigurariDeViataSiBunuri
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
             this.pbLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbLogo.InitialImage")));
             this.pbLogo.Location = new System.Drawing.Point(31, 22);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(399, 372);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 28;
             this.pbLogo.TabStop = false;
+            this.pbLogo.DragDrop += new System.Windows.Forms.DragEventHandler(this.pbLogo_DragDrop);
+            this.pbLogo.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbLogo_DragEnter);
             // 
             // tabDoc
             // 
@@ -586,7 +598,7 @@ namespace AsigurariDeViataSiBunuri
             this.tabDoc.Margin = new System.Windows.Forms.Padding(2);
             this.tabDoc.Name = "tabDoc";
             this.tabDoc.Padding = new System.Windows.Forms.Padding(2);
-            this.tabDoc.Size = new System.Drawing.Size(906, 457);
+            this.tabDoc.Size = new System.Drawing.Size(916, 457);
             this.tabDoc.TabIndex = 2;
             this.tabDoc.Text = "Documents";
             // 
@@ -621,7 +633,7 @@ namespace AsigurariDeViataSiBunuri
             this.tabAdv.Margin = new System.Windows.Forms.Padding(2);
             this.tabAdv.Name = "tabAdv";
             this.tabAdv.Padding = new System.Windows.Forms.Padding(2);
-            this.tabAdv.Size = new System.Drawing.Size(906, 457);
+            this.tabAdv.Size = new System.Drawing.Size(916, 457);
             this.tabAdv.TabIndex = 1;
             this.tabAdv.Text = "Advantages";
             // 
@@ -645,7 +657,7 @@ namespace AsigurariDeViataSiBunuri
             this.tabChr.Margin = new System.Windows.Forms.Padding(2);
             this.tabChr.Name = "tabChr";
             this.tabChr.Padding = new System.Windows.Forms.Padding(2);
-            this.tabChr.Size = new System.Drawing.Size(906, 457);
+            this.tabChr.Size = new System.Drawing.Size(916, 457);
             this.tabChr.TabIndex = 0;
             this.tabChr.Text = "Characteristics";
             // 
@@ -667,11 +679,11 @@ namespace AsigurariDeViataSiBunuri
             this.tabControl.Controls.Add(this.tabDoc);
             this.tabControl.Controls.Add(this.tabOffer);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl.Location = new System.Drawing.Point(276, 142);
+            this.tabControl.Location = new System.Drawing.Point(273, 142);
             this.tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(914, 496);
+            this.tabControl.Size = new System.Drawing.Size(924, 496);
             this.tabControl.TabIndex = 9;
             // 
             // errorProvider
@@ -693,32 +705,25 @@ namespace AsigurariDeViataSiBunuri
             // insurancesToolStripMenuItem1
             // 
             this.insurancesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem,
             this.seeOwnedInsurancesToolStripMenuItem,
             this.seeMeetingDatesAndTimeToolStripMenuItem});
             this.insurancesToolStripMenuItem1.Name = "insurancesToolStripMenuItem1";
             this.insurancesToolStripMenuItem1.Size = new System.Drawing.Size(91, 24);
             this.insurancesToolStripMenuItem1.Text = "Insurances";
             // 
-            // seeRecentlyAdddedInsurancesInfoToolStripMenuItem
-            // 
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem.Name = "seeRecentlyAdddedInsurancesInfoToolStripMenuItem";
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem.Size = new System.Drawing.Size(330, 26);
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem.Text = "See recently addded insurances info";
-            this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem.Click += new System.EventHandler(this.seeRecentlyAdddedInsurancesInfoToolStripMenuItem_Click);
-            // 
             // seeOwnedInsurancesToolStripMenuItem
             // 
             this.seeOwnedInsurancesToolStripMenuItem.Name = "seeOwnedInsurancesToolStripMenuItem";
-            this.seeOwnedInsurancesToolStripMenuItem.Size = new System.Drawing.Size(330, 26);
+            this.seeOwnedInsurancesToolStripMenuItem.Size = new System.Drawing.Size(278, 26);
             this.seeOwnedInsurancesToolStripMenuItem.Text = "See owned insurances";
             this.seeOwnedInsurancesToolStripMenuItem.Click += new System.EventHandler(this.seeOwnedInsurancesToolStripMenuItem_Click);
             // 
             // seeMeetingDatesAndTimeToolStripMenuItem
             // 
             this.seeMeetingDatesAndTimeToolStripMenuItem.Name = "seeMeetingDatesAndTimeToolStripMenuItem";
-            this.seeMeetingDatesAndTimeToolStripMenuItem.Size = new System.Drawing.Size(330, 26);
+            this.seeMeetingDatesAndTimeToolStripMenuItem.Size = new System.Drawing.Size(278, 26);
             this.seeMeetingDatesAndTimeToolStripMenuItem.Text = "See meeting dates and time";
+            this.seeMeetingDatesAndTimeToolStripMenuItem.Click += new System.EventHandler(this.seeMeetingDatesAndTimeToolStripMenuItem_Click);
             // 
             // Adelurance_System
             // 
@@ -816,8 +821,8 @@ namespace AsigurariDeViataSiBunuri
         private System.Windows.Forms.ComboBox cbFieldH;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem insurancesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem seeRecentlyAdddedInsurancesInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seeOwnedInsurancesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seeMeetingDatesAndTimeToolStripMenuItem;
+        private System.Windows.Forms.Label lbPhoto;
     }
 }

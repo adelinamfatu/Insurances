@@ -14,6 +14,7 @@ namespace AsigurariDeViataSiBunuri
 {
     public partial class Adelurance_System : Form
     {
+        bool imageDropped = false;
         string connectionName;
         Client c;
         Insurance i;
@@ -57,6 +58,7 @@ namespace AsigurariDeViataSiBunuri
             textBox5.Visible = false;
             textBox6.Visible = false;
             pbLogo.Visible = false;
+            lbPhoto.Visible = false;
             dateOfDeparture.Visible = false;
             dateOfReturning.Visible = false;
             cbType.Visible = false;
@@ -97,6 +99,7 @@ namespace AsigurariDeViataSiBunuri
             lbPostalCode.Text = "Postal code";
             lbStartDuration.Text = "Start duration of insurance";
             lbValidityPeriod.Text = "Validity period";
+            lbPhoto.Text = "*Please upload your photo";
             if(auto == true)
             {
                 btnAuto.PerformClick();
@@ -144,6 +147,7 @@ namespace AsigurariDeViataSiBunuri
             lbPostalCode.Text = "Cod postal";
             lbStartDuration.Text = "Durata de incepere a asigurarii";
             lbValidityPeriod.Text = "Perioada de valabilitate";
+            lbPhoto.Text = "*Incarcati va rog poza";
             if (auto == true)
             {
                 btnAuto.PerformClick();
@@ -206,6 +210,7 @@ namespace AsigurariDeViataSiBunuri
                 lbDeclaration.Visible = false;
                 cbTypeH.Visible = false;
                 cbFieldH.Visible = false;
+                lbPhoto.Visible = false;
             }
         }
 
@@ -223,6 +228,7 @@ namespace AsigurariDeViataSiBunuri
             textBox4.Visible = true;
             textBox5.Visible = true;
             textBox6.Visible = true;
+            lbPhoto.Visible = false;
             pbLogo.Visible = false;
             dateOfDeparture.Visible = false;
             dateOfReturning.Visible = false;
@@ -253,6 +259,7 @@ namespace AsigurariDeViataSiBunuri
             lbDeclaration.Visible = false;
             cbTypeH.Visible = false;
             cbFieldH.Visible = false;
+            lbPhoto.Visible = true;
         }
 
         private void btnAuto_Click(object sender, EventArgs e)
@@ -267,7 +274,13 @@ namespace AsigurariDeViataSiBunuri
             life = false;
             travel = false;
             accidents = false;
-            if(rbEng.Checked)
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            if (rbEng.Checked)
             {
                 cbType.Items.Clear();
                 cbType.Items.Add("Manual");
@@ -373,6 +386,12 @@ namespace AsigurariDeViataSiBunuri
             life = false;
             travel = false;
             accidents = false;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
             if (rbEng.Checked)
             {
                 //Chr
@@ -443,6 +462,12 @@ namespace AsigurariDeViataSiBunuri
             life = false;
             travel = false;
             accidents = false;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
             if (rbEng.Checked)
             {
                 //Chr
@@ -505,6 +530,7 @@ namespace AsigurariDeViataSiBunuri
 
         private void btnLife_Click(object sender, EventArgs e)
         {
+            pbLogo.AllowDrop = true;
             makeLabelsAndTextboxVisible();
             leftSideInvisible();
             lbDeclaration.Visible = true;
@@ -514,6 +540,12 @@ namespace AsigurariDeViataSiBunuri
             life = true;
             travel = false;
             accidents = false;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
             if (rbEng.Checked)
             {
                 //Chr
@@ -574,6 +606,12 @@ namespace AsigurariDeViataSiBunuri
             life = false;
             travel = true;
             accidents = false;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
             if (rbEng.Checked)
             {
                 //Chr
@@ -598,7 +636,7 @@ namespace AsigurariDeViataSiBunuri
                 label3.Text = "Destination country";
                 label4.Text = "Number of travelers";
                 label5.Text = "Date of departure";
-                label6.Text = "Return Date";
+                label6.Text = "Return date";
             }
             else
             {
@@ -638,6 +676,12 @@ namespace AsigurariDeViataSiBunuri
             life = false;
             travel = false;
             accidents = true;
+            textBox1.Clear(); 
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
             if (rbEng.Checked)
             {
                 //Chr
@@ -773,15 +817,52 @@ namespace AsigurariDeViataSiBunuri
             return false;
         }
 
+        private bool verifyDate()
+        {
+            int year = dateStartDuration.Value.Year;
+            int month = dateStartDuration.Value.Month;
+            int day = dateStartDuration.Value.Day;
+            if((year < System.DateTime.Now.Year) ||
+                (year == System.DateTime.Now.Year
+                && month < System.DateTime.Now.Month) ||
+                (day < System.DateTime.Now.Day &&
+                month == System.DateTime.Now.Month &&
+                year == System.DateTime.Now.Year))
+            {
+                if(rbEng.Checked)
+                {
+                    MessageBox.Show("You can't start the insurance at a previous date!");
+                }
+                else
+                {
+                    MessageBox.Show("Nu puteti sa incepeti asigurarea la o data anterioara!");
+                }
+                return false;
+            }
+            return true;
+        }
+
+        private void ownedInsuranceMessage()
+        {
+            if (rbEng.Checked)
+            {
+                MessageBox.Show("You already have such an insurance!");
+            }
+            else
+            {
+                MessageBox.Show("Deja aveti o astfel de asigurare!");
+            }
+        }
+
         private void btnCalculateOffer_Click(object sender, EventArgs e)
         {
             if(!verifyData())
             {
                 if (auto == true)
                 {
-                    if(textBox1.Text == "")
+                    if (textBox1.Text == "")
                     {
-                        if(rbEng.Checked)
+                        if (rbEng.Checked)
                         {
                             errorProvider.SetError(textBox1, "You didn't introduce the registration number");
                         }
@@ -789,7 +870,7 @@ namespace AsigurariDeViataSiBunuri
                         {
                             errorProvider.SetError(textBox1, "Nu ati introdus numarul de inregistrare");
                         }
-                    } 
+                    }
                     else if (textBox2.Text == "")
                     {
                         if (rbEng.Checked)
@@ -1034,244 +1115,359 @@ namespace AsigurariDeViataSiBunuri
             }
             else
             {
-                errorProvider.Clear();
-                insertClient();
-                if(auto == true)
+                if(verifyDate())
                 {
-                    i = new Insurance("Autovehicle", int.Parse(cbValidityPeriod.Text));
-                    i.Price = calculateAutoInsurance();
-                    if(proceedWithInsurance() == true)
+                    errorProvider.Clear();
+                    insertClient();
+                    if (auto == true)
                     {
-                        scheduleTime();
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertAutoCommand = new OleDbCommand();
-                        try
+                        i = new Insurance("Autovehicle", int.Parse(cbValidityPeriod.Text));
+                        i.Price = calculateAutoInsurance();
+                        if(checkInsurance("Autovehicle") == false)
                         {
-                            connection.Open();
-                            if (rbRom.Checked)
+                            if (proceedWithInsurance() == true)
                             {
-                                if (cbType.Text == "Automata")
+                                OleDbConnection connection = new OleDbConnection(connectionName);
+                                OleDbCommand insertAutoCommand = new OleDbCommand();
+                                try
                                 {
-                                    insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
-                                    $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', 'Automatic', '{i.Period}', '{i.Price}')";
+                                    connection.Open();
+                                    if (rbRom.Checked)
+                                    {
+                                        if (cbType.Text == "Automata")
+                                        {
+                                            insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
+                                            $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', 'Automatic', '{i.Period}', '{i.Price}')";
+                                        }
+                                        else
+                                        {
+                                            insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
+                                            $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', 'Manual', '{i.Period}', '{i.Price}')";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
+                                                                    $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', '{cbType.Text}', '{i.Period}', '{i.Price}')";
+                                    }
+                                    insertAutoCommand.Connection = connection;
+                                    insertAutoCommand.ExecuteNonQuery();
+                                    insurances.Add(i);
+                                    printInvoice();
+                                    scheduleTime();
+                                    textBox1.Clear();
+                                    textBox2.Clear();
+                                    textBox3.Clear();
+                                    textBox4.Clear();
+                                    textBox5.Clear();
+                                    textBox6.Clear();
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
-                                    $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', 'Manual', '{i.Period}', '{i.Price}')";
+                                    if (rbEng.Checked)
+                                    {
+                                        MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                    }
+                                }
+                                finally
+                                {
+                                    connection.Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ownedInsuranceMessage();
+                        }
+                    }
+                    else if (house == true)
+                    {
+                        i = new Insurance("House", int.Parse(cbValidityPeriod.Text));
+                        i.Price = calculateHouseInsurance();
+                        if(checkInsurance("House") == false)
+                        {
+                            if (proceedWithInsurance() == true)
+                            {
+                                OleDbConnection connection = new OleDbConnection(connectionName);
+                                OleDbCommand insertCommand = new OleDbCommand();
+                                try
+                                {
+                                    connection.Open();
+                                    insertCommand.CommandText = $"INSERT INTO house(CNP, ConstructionType, Structure, Environment, ConstructionYear, Surface, NbRooms, Period, Price)" +
+                                        $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', '{textBox6.Text}', '{i.Period}', '{i.Price}')";
+                                    insertCommand.Connection = connection;
+                                    insertCommand.ExecuteNonQuery();
+                                    insurances.Add(i);
+                                    printInvoice();
+                                    scheduleTime();
+                                    textBox1.Clear();
+                                    textBox2.Clear();
+                                    textBox3.Clear();
+                                    textBox4.Clear();
+                                    textBox5.Clear();
+                                    textBox6.Clear();
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (rbEng.Checked)
+                                    {
+                                        MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                    }
+                                }
+                                finally
+                                {
+                                    connection.Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ownedInsuranceMessage();
+                        }
+                    }
+                    else if (health == true)
+                    {
+                        i = new Insurance("Health", int.Parse(cbValidityPeriod.Text));
+                        i.Price = calculateHealthInsurance();
+                        if(checkInsurance("Health") == false)
+                        {
+                            if (proceedWithInsurance() == true)
+                            {
+                                OleDbConnection connection = new OleDbConnection(connectionName);
+                                OleDbCommand insertCommand = new OleDbCommand();
+                                try
+                                {
+                                    connection.Open();
+                                    insertCommand.CommandText = $"INSERT INTO health(CNP, NbHealthCard, TypeStudies, Occupation, InsuranceField, InsuranceType, HadInThePast, Period, Price)" +
+                                        $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{cbFieldH.Text}', '{cbTypeH.Text}', '{textBox6.Text}', '{i.Period}', '{i.Price}')";
+                                    insertCommand.Connection = connection;
+                                    insertCommand.ExecuteNonQuery();
+                                    insurances.Add(i); 
+                                    printInvoice();
+                                    scheduleTime();
+                                    textBox1.Clear();
+                                    textBox2.Clear();
+                                    textBox3.Clear();
+                                    textBox4.Clear();
+                                    textBox5.Clear();
+                                    textBox6.Clear();
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (rbEng.Checked)
+                                    {
+                                        MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                    }
+                                }
+                                finally
+                                {
+                                    connection.Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ownedInsuranceMessage();
+                        }
+                    }
+                    else if (life == true)
+                    {
+                        i = new Insurance("Life", int.Parse(cbValidityPeriod.Text));
+                        age = System.DateTime.Now.Year - c.DateOfBirth.Year;
+                        i.Price = calculateLifeInsurance();
+                        if (imageDropped == false)
+                        {
+                            if (rbEng.Checked)
+                            {
+                                MessageBox.Show("You need to upload an image first!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Intai trebuie sa incarcati o poza!");
+                            }
+                        }
+                        else
+                        {
+                            if (checkInsurance("Life") == false)
+                            {
+                                if (proceedWithInsurance() == true)
+                                {
+                                    OleDbConnection connection = new OleDbConnection(connectionName);
+                                    OleDbCommand insertCommand = new OleDbCommand();
+                                    try
+                                    {
+                                        connection.Open();
+                                        insertCommand.CommandText = $"INSERT INTO life(CNP, Period, Price, Age)" +
+                                                $"VALUES('{c.CNP}', '{i.Period}', '{i.Price}', '{age}')";
+                                        insertCommand.Connection = connection;
+                                        insertCommand.ExecuteNonQuery();
+                                        insurances.Add(i);
+                                        printInvoice();
+                                        scheduleTime();
+                                        textBox1.Clear();
+                                        textBox2.Clear();
+                                        textBox3.Clear();
+                                        textBox4.Clear();
+                                        textBox5.Clear();
+                                        textBox6.Clear();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (rbEng.Checked)
+                                        {
+                                            MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        connection.Close();
+                                    }
                                 }
                             }
                             else
                             {
-                                insertAutoCommand.CommandText = $"INSERT INTO autovehicle(CNP, RegistrationNumber, ChassisSeries, Brand, Model, ManufactureYear, Type, Period, Price)" +
-                                                            $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', '{cbType.Text}', '{i.Period}', '{i.Price}')";
+                                ownedInsuranceMessage();
                             }
-                            insertAutoCommand.Connection = connection;
-                            insertAutoCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (rbEng.Checked)
-                            {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
-                            }
-                        }
-                        finally
-                        {
-                            connection.Close();
                         }
                     }
-                }
-                else if(house == true)
-                {
-                    i = new Insurance("House", int.Parse(cbValidityPeriod.Text));
-                    i.Price = calculateHouseInsurance();
-                    if(proceedWithInsurance() == true)
+                    else if (travel == true)
                     {
-                        scheduleTime();
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertCommand = new OleDbCommand();
-                        try
+                        i = new Insurance("Travel", int.Parse(cbValidityPeriod.Text));
+                        i.Price = calculateTravelInsurance();
+                        if(checkInsurance("Travel") == false)
                         {
-                            connection.Open();
-                            insertCommand.CommandText = $"INSERT INTO house(CNP, ConstructionType, Structure, Environment, ConstructionYear, Surface, NbRooms, Period, Price)" +
-                                $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', '{textBox5.Text}', '{textBox6.Text}', '{i.Period}', '{i.Price}')";
-                            insertCommand.Connection = connection;
-                            insertCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (rbEng.Checked)
+                            if (proceedWithInsurance() == true)
                             {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                OleDbConnection connection = new OleDbConnection(connectionName);
+                                OleDbCommand insertCommand = new OleDbCommand();
+                                try
+                                {
+                                    connection.Open();
+                                    insertCommand.CommandText = $"INSERT INTO travel(CNP, Purpose, Continent, Country, NbTravelers, Departure, Arrival, Period, Price)" +
+                                            $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', @Departure, @Arrival, '{i.Period}', '{i.Price}')";
+                                    insertCommand.Parameters.Add("@Departure", OleDbType.Date).Value = dateOfDeparture.Value;
+                                    insertCommand.Parameters.Add("@Arrival", OleDbType.Date).Value = dateOfReturning.Value;
+                                    insertCommand.Connection = connection;
+                                    insertCommand.ExecuteNonQuery();
+                                    insurances.Add(i);
+                                    printInvoice();
+                                    scheduleTime();
+                                    textBox1.Clear();
+                                    textBox2.Clear();
+                                    textBox3.Clear();
+                                    textBox4.Clear();
+                                    textBox5.Clear();
+                                    textBox6.Clear();
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (rbEng.Checked)
+                                    {
+                                        MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                    }
+                                }
+                                finally
+                                {
+                                    connection.Close();
+                                }
                             }
                         }
-                        finally
+                        else
                         {
-                            connection.Close();
+                            ownedInsuranceMessage();
                         }
                     }
-                }
-                else if(health == true)
-                {
-                    i = new Insurance("Health", int.Parse(cbValidityPeriod.Text));
-                    i.Price = calculateHealthInsurance();
-                    if(proceedWithInsurance() == true)
+                    else if (accidents == true)
                     {
-                        scheduleTime();
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertCommand = new OleDbCommand();
-                        try
-                        {
-                            connection.Open();
-                            insertCommand.CommandText = $"INSERT INTO health(CNP, NbHealthCard, TypeStudies, Occupation, InsuranceField, InsuranceType, HadInThePast, Period, Price)" +
-                                $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{cbFieldH.Text}', '{cbTypeH.Text}', '{textBox6.Text}', '{i.Period}', '{i.Price}')";
-                            insertCommand.Connection = connection;
-                            insertCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
+                        i = new Insurance("Accidents", int.Parse(cbValidityPeriod.Text));
+                        i.Price = calculateAccidentsInsurance();
+                        if (imageDropped == false)
                         {
                             if (rbEng.Checked)
                             {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                MessageBox.Show("You need to upload an image first!");
                             }
                             else
                             {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                MessageBox.Show("Intai trebuie sa incarcati o poza!");
                             }
                         }
-                        finally
+                        else
                         {
-                            connection.Close();
-                        }
-                    }
-                }
-                else if(life == true)
-                {
-                    i = new Insurance("Life", int.Parse(cbValidityPeriod.Text));
-                    age = System.DateTime.Now.Year - c.DateOfBirth.Year;
-                    i.Price = calculateLifeInsurance();
-                    if(proceedWithInsurance() == true)
-                    {
-                        scheduleTime();
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertCommand = new OleDbCommand();
-                        try
-                        {
-                            connection.Open();
-                            insertCommand.CommandText = $"INSERT INTO life(CNP, Period, Price, Age)" +
-                                    $"VALUES('{c.CNP}', '{i.Period}', '{i.Price}', '{age}')";
-                            insertCommand.Connection = connection;
-                            insertCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (rbEng.Checked)
+                            if (checkInsurance("Accident") == false)
                             {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                if (proceedWithInsurance() == true)
+                                {
+                                    OleDbConnection connection = new OleDbConnection(connectionName);
+                                    OleDbCommand insertCommand = new OleDbCommand();
+                                    try
+                                    {
+                                        connection.Open();
+                                        insertCommand.CommandText = $"INSERT INTO accident(CNP, Period, Price) " +
+                                                $"VALUES('{c.CNP}', '{i.Period}', '{i.Price}')";
+                                        insertCommand.Connection = connection;
+                                        insertCommand.ExecuteNonQuery();
+                                        insurances.Add(i);
+                                        printInvoice();
+                                        scheduleTime();
+                                        textBox1.Clear();
+                                        textBox2.Clear();
+                                        textBox3.Clear();
+                                        textBox4.Clear();
+                                        textBox5.Clear();
+                                        textBox6.Clear();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (rbEng.Checked)
+                                        {
+                                            MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        connection.Close();
+                                    }
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
+                                ownedInsuranceMessage();
                             }
-                        }
-                        finally
-                        {
-                            connection.Close();
-                        }
-                    }
-                }
-                else if(travel == true)
-                {
-                    i = new Insurance("Travel", int.Parse(cbValidityPeriod.Text));
-                    i.Price = calculateTravelInsurance();
-                    if(proceedWithInsurance() == true)
-                    {
-                        scheduleTime();
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertCommand = new OleDbCommand();
-                        try
-                        {
-                            connection.Open();
-                            insertCommand.CommandText = $"INSERT INTO travel(CNP, Purpose, Continent, Country, NbTravelers, Departure, Arrival, Period, Price)" +
-                                    $"VALUES('{c.CNP}', '{textBox1.Text}', '{textBox2.Text}', '{textBox3.Text}', '{textBox4.Text}', @Departure, @Arrival, '{i.Period}', '{i.Price}')";
-                            insertCommand.Parameters.Add("@Departure", OleDbType.Date).Value = dateOfDeparture.Value;
-                            insertCommand.Parameters.Add("@Arrival", OleDbType.Date).Value = dateOfReturning.Value;
-                            insertCommand.Connection = connection;
-                            insertCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (rbEng.Checked)
-                            {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
-                            }
-                        }
-                        finally
-                        {
-                            connection.Close();
-                        }
-                    }
-                }
-                else if(accidents == true)
-                {
-                    i = new Insurance("Accidents", int.Parse(cbValidityPeriod.Text));
-                    i.Price = calculateAccidentsInsurance();
-                    if(proceedWithInsurance() == true && checkInsurance("Accidents") == false)
-                    {
-                        OleDbConnection connection = new OleDbConnection(connectionName);
-                        OleDbCommand insertCommand = new OleDbCommand();
-                        try
-                        {
-                            connection.Open();
-                            insertCommand.CommandText = $"INSERT INTO accidents(CNP, Period, Price)" +
-                                    $"VALUES('{c.CNP}', '{i.Period}', '{i.Price}')";
-                            insertCommand.Connection = connection;
-                            insertCommand.ExecuteNonQuery();
-                            insuranceAddded();
-                            insurances.Add(i);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (rbEng.Checked)
-                            {
-                                MessageBox.Show("There has been an erorr introducing your data! Check the fields again!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("S-a produs o eroare la introducerea datelor! Verificati din nou campurile!");
-                            }
-                        }
-                        finally
-                        {
-                            connection.Close();
-                            scheduleTime();
                         }
                     }
                 }
             }
+        }
+
+        private void printInvoice()
+        {
+            Invoice inv = new Invoice(c, i.Price);
+            inv.ShowDialog();
         }
 
         private bool checkInsurance(string table)
@@ -1300,18 +1496,6 @@ namespace AsigurariDeViataSiBunuri
                 connection.Close();
             }
             return exist;
-        }
-
-        private void insuranceAddded()
-        {
-            if (rbEng.Checked)
-            {
-                MessageBox.Show("Your insurance request was successfully added!", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                MessageBox.Show("Cererea dvs pt asigurare a fost adaugata cu succes!", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
         }
 
         private void scheduleTime()
@@ -1349,14 +1533,14 @@ namespace AsigurariDeViataSiBunuri
         private double calculateAutoInsurance()
         {
             double price = 0;
-            price = i.Period * 10 * 0.001 * int.Parse(textBox5.Text);
+            price = i.Period * 0.0001 * int.Parse(textBox5.Text) * age;
             return price;
         }
 
         private double calculateHouseInsurance()
         {
             double price = 0;
-            price = i.Period * 8 * 0.0001 * int.Parse(textBox4.Text) * int.Parse(textBox5.Text) * int.Parse(textBox6.Text);
+            price = i.Period * 8 * 0.00001 * int.Parse(textBox4.Text) * int.Parse(textBox5.Text) * int.Parse(textBox6.Text);
             return price;
         }
 
@@ -1384,7 +1568,7 @@ namespace AsigurariDeViataSiBunuri
         private double calculateAccidentsInsurance()
         {
             double price = 0;
-            price = i.Period * 122.98;
+            price = i.Period * 32.98;
             return price;
         }
 
@@ -1467,12 +1651,6 @@ namespace AsigurariDeViataSiBunuri
             }
         }
 
-        private void seeRecentlyAdddedInsurancesInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Info inf = new Info(insurances);
-            inf.ShowDialog();
-        }
-
         private void seeOwnedInsurancesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             insurances.Clear();
@@ -1531,7 +1709,7 @@ namespace AsigurariDeViataSiBunuri
                         int.Parse(reader["period"].ToString()));
                     insurances.Add(i);
                 }
-                queryAccidents.CommandText = $"SELECT period, price FROM accidents WHERE CNP='{c.CNP}'";
+                queryAccidents.CommandText = $"SELECT period, price FROM accident WHERE CNP='{c.CNP}'";
                 queryAccidents.Connection = connection;
                 reader = queryAccidents.ExecuteReader();
                 while (reader.Read())
@@ -1551,6 +1729,31 @@ namespace AsigurariDeViataSiBunuri
             }
             Info inf = new Info(insurances);
             inf.ShowDialog();
+        }
+
+        private void seeMeetingDatesAndTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Info inf = new Info(c);
+            inf.ShowDialog();
+        }
+
+        private void pbLogo_DragDrop(object sender, DragEventArgs e)
+        {
+            imageDropped = true;
+            var data = e.Data.GetData(DataFormats.FileDrop);
+            if(data != null)
+            {
+                var fileName = data as string[];
+                if(fileName.Length > 0)
+                {
+                    pbLogo.Image = Image.FromFile(fileName[0]);
+                }
+            }
+        }
+
+        private void pbLogo_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
         }
     }
 }
